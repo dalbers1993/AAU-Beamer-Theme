@@ -1,0 +1,75 @@
+\mode<presentation>
+
+\setbeamertemplate{title page}{
+	\begin{tikzpicture}[remember picture, overlay]
+		\node (title) at ([yshift=1cm]current page.center) {\usebeamercolor[fg]{title}\usebeamerfont{title}\inserttitle};
+		\node [below = 1em of title] (subtitle) {\usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\insertsubtitle};
+		\ifthenelse{\equal{\insertsubtitle}{}}{
+		\node [below = 2em of title] (author) {\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor};}{
+		\node [below = 2em of subtitle] (author) {\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor};}		
+	\end{tikzpicture}
+}
+
+
+\setbeamertemplate{footline}{
+	
+\begin{tikzpicture}[remember picture, overlay]
+	\node[rectangle, fill = aaulightblue, text width=\paperwidth, minimum height=2em, anchor=south west] (footerline) {};
+	\node [anchor=south west, text = white] at (current page.south west) (institut) {\usebeamercolor[fg]{institute}\strut\insertinstitute};
+	\node [anchor=south east, text = white] at (current page.south east) (date) {\strut\usebeamercolor[fg]{date}\insertdate};
+\end{tikzpicture}
+
+
+}
+
+
+\setbeamertemplate{itemize item}{\textbullet}
+%\setbeamertemplate{itemize subitem}{\textbullet}
+
+\setbeamertemplate{frametitle}{
+	\vspace*{2em}\hspace*{0em}\insertframetitle
+}
+
+\setbeamertemplate{blocks}[rounded][shadow]
+
+
+
+
+\setbeamertemplate{background canvas}{
+	
+	\ifbeamer@plainframe
+		\begin{tikzpicture}
+			\node[opacity=0]{\includegraphics[width=\paperwidth,height=\paperheight]{background}};
+		\end{tikzpicture}
+	\else
+	
+	\ifthenelse{\equal{\thepage}{1}}
+	{
+		\begin{tikzpicture}[remember picture, overlay]
+			\fill[aaudarkblue] (current page.south west) rectangle (current page.north east);
+		\end{tikzpicture}
+	}{
+		\begin{tikzpicture}
+			\node{\includegraphics[width=\paperwidth, height=\paperheight]{background}};
+		\end{tikzpicture}
+	}
+	\fi
+}
+
+\setbeamertemplate{section page}{
+	\begin{tikzpicture}[remember picture, overlay]
+		\fill[aaudarkblue] (current page.south west) rectangle (current page.north east);
+	\end{tikzpicture}
+	\begin{tikzpicture}[remember picture, overlay]
+		\node (section title) at ([yshift=1cm]current page.center) {\usebeamercolor[fg]{section}\usebeamerfont{section}\insertsection};
+		\node [below = 1em of section title] (subsection title) {\usebeamercolor[fg]{subsection}\usebeamerfont{subsection}\insertsubsection};
+	\end{tikzpicture}
+}
+
+\setbeamertemplate{section in toc}{
+	\inserttocsectionnumber. \inserttocsection
+}
+\setbeamertemplate{subsection in toc}{}
+\setbeamertemplate{subsubsection in toc}{}
+
+\mode<all>

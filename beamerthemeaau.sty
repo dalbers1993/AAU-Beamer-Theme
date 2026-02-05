@@ -1,0 +1,33 @@
+\mode<presentation>
+
+%Pakete
+\RequirePackage{tikz}
+\usetikzlibrary{positioning}
+\RequirePackage{graphicx}
+\RequirePackage{ifthen}
+\RequirePackage{xcolor}
+\RequirePackage{xparse}
+
+
+%Einstellungen
+\useinnertheme{aau}
+\useoutertheme{aau}
+\usecolortheme{aau}
+\usefonttheme{aau}
+
+%Environments
+\NewDocumentEnvironment{authquote}{O{}}
+{
+	\begin{quotation}
+	}
+	{
+		\IfNoValueF{#1}{
+			\par\smallskip
+			\raggedleft\normalfont\bfseries #1
+		}
+	\end{quotation}
+}
+
+
+\mode<all>
+
