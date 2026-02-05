@@ -1,2 +1,2 @@
-\[PDF Dokumentation anzeigen](beameraau-example.pdf)
+[PDF Dokumentation anzeigen](beameraau-example.pdf)
 
