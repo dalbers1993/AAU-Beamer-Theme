@@ -3,5 +3,5 @@
 
 
 Die Titelfolie ist angepasst wie folgt
-![](beameraau-example.pdf)
+![Hier](beameraau-example.pdf)
 
