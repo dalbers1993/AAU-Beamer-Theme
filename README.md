@@ -2,5 +2,6 @@
 
 
 
-Mein Versuch eines Beamer Themes, das dem AAU Theme gleicht.
+Die Titelfolie ist angepasst wie folgt
+![](beameraau-example.pdf)
 
