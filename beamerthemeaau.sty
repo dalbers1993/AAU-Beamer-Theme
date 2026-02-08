@@ -19,23 +19,6 @@
 	}
 }
 
-\pgfkeys{
-	/aau/block/.cd,
-	.is choice,
-	transparent/.code=\aau@block@transparent,
-	fill/.code=\aau@block@fill
-}
-
-\newcommand{\aau@block@transparent}{
-	\setbeamercolor{block title}{bg=red}
-	\setbeamercolor{block body}{bg=red}
-}
-\newcommand{\aau@block@fill}{
-	\setbeamercolor{block title}{bg=yellow}
-	\setbeamercolor{block body}{bg=yellow}
-}
-
-\ProcessPgfPackageOptions{/aau}
 %Einstellungen
 \useinnertheme{aau}
 \useoutertheme{aau}
@@ -55,6 +38,7 @@
 	\end{quotation}
 }
 
+\ProcessPgfOptions{/aau}
 
 \mode<all>
 

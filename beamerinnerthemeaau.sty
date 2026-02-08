@@ -1,5 +1,19 @@
 \mode<presentation>
 
+\newcommand{\aau@inner@bg}{
+		\begin{tikzpicture}
+			\node{\includegraphics[width=\paperwidth, height=\paperheight]{background}};
+		\end{tikzpicture}
+}
+
+
+\pgfkeys{
+	/aau/inner/bg/.cd,
+	.is choice,
+	aau/.code= \let\aau@inner@bg\aau@inner@bg,
+	none/.code=\let\aau@inner@bg\@empty,
+}
+
 \setbeamertemplate{title page}{
 	\begin{tikzpicture}[remember picture, overlay]
 		\node (title) at ([yshift=1cm]current page.center) {\usebeamercolor[fg]{title}\usebeamerfont{title}\inserttitle};
@@ -49,9 +63,7 @@
 			\fill[aaudarkblue] (current page.south west) rectangle (current page.north east);
 		\end{tikzpicture}
 	}{
-		\begin{tikzpicture}
-			\node{\includegraphics[width=\paperwidth, height=\paperheight]{background}};
-		\end{tikzpicture}
+		\aau@inner@bg
 	}
 	\fi
 }
@@ -71,5 +83,7 @@
 }
 \setbeamertemplate{subsection in toc}{}
 \setbeamertemplate{subsubsection in toc}{}
+
+\ProcessPgfOptions{/aau/inner}
 
 \mode<all>
