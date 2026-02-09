@@ -1,11 +1,54 @@
 \mode<presentation>
 
 \newcommand{\aau@inner@bg}{
-		\begin{tikzpicture}
-			\node{\includegraphics[width=\paperwidth, height=\paperheight]{background}};
-		\end{tikzpicture}
+		\includegraphics[width=\paperwidth, height=\paperheight]{background}
 }
 
+\newcommand{\aau@inner@footlinetext}{}
+\newcommand{\aau@inner@id}{
+	\insertinstitute \hfill \insertdate
+}
+\newcommand{\aau@inner@ia}{
+	\insertinstitute \hfill \insertauthor
+}
+\newcommand{\aau@inner@ai}{
+	\insertauthor \hfill \insertinstitute
+}
+\newcommand{\aau@inner@ad}{
+	\insertauthor \hfill \insertdate
+}
+\newcommand{\aau@inner@di}{
+	\insertdate \hfill \insertinstitute
+}
+\newcommand{\aau@inner@da}{
+	\insertdate \hfill \insertauthor
+}
+\newcommand{\aau@inner@iad}{
+	\insertinstitute \hfill \insertauthor \hfill \insertdate
+}
+\newcommand{\aau@inner@ida}{
+	\insertinstitute \hfill \insertdate \hfill \insertauthor
+}
+\newcommand{\aau@inner@aid}{
+	\insertauthor \hfill \insertinstitute \hfill \insertdate  
+}
+\newcommand{\aau@inner@adi}{
+	\insertauthor \hfill \insertdate \hfill \insertinstitute   
+}
+\newcommand{\aau@inner@dia}{
+	\insertdate \hfill \insertinstitute \hfill \insertauthor   
+}
+\newcommand{\aau@inner@dai}{
+	\insertdate \hfill \insertauthor \hfill \insertinstitute   
+}
+
+
+
+\setbeamertemplate{footline}{
+	\begin{beamercolorbox}[wd=\textwidth, ht=1.3em, dp=0.7em, leftskip=0.3em, rightskip=0.3em]{colorbox}
+		\aau@inner@footlinetext
+	\end{beamercolorbox}
+}
 
 \pgfkeys{
 	/aau/inner/bg/.cd,
@@ -14,8 +57,29 @@
 	none/.code=\let\aau@inner@bg\@empty,
 }
 
+
+\pgfkeys{
+	/aau/inner/footlinetext/.cd,
+	.is choice,
+	id/.code=\let\aau@inner@footlinetext\aau@inner@id,
+	ia/.code=\let\aau@inner@footlinetext\aau@inner@ia,
+	ai/.code=\let\aau@inner@footlinetext\aau@inner@ai,
+	ad/.code=\let\aau@inner@footlinetext\aau@inner@ad,
+	di/.code=\let\aau@inner@footlinetext\aau@inner@di,
+	da/.code=\let\aau@inner@footlinetext\aau@inner@da,
+	iad/.code=\let\aau@inner@footlinetext\aau@inner@iad,
+	ida/.code=\let\aau@inner@footlinetext\aau@inner@ida,
+	aid/.code=\let\aau@inner@footlinetext\aau@inner@aid,
+	adi/.code=\let\aau@inner@footlinetext\aau@inner@adi,
+	dia/.code=\let\aau@inner@footlinetext\aau@inner@dia,
+	dai/.code=\let\aau@inner@footlinetext\aau@inner@dai,
+	iad/.code=\let\aau@inner@footlinetext\aau@inner@iad,
+	none/.code=\let\aau@inner@footlinetext\aau@inner@footlinetext,
+}
+
 \setbeamertemplate{title page}{
 	\begin{tikzpicture}[remember picture, overlay]
+		\fill[aaudarkblue] (current page.south west) rectangle (current page.north east);
 		\node (title) at ([yshift=1cm]current page.center) {\usebeamercolor[fg]{title}\usebeamerfont{title}\inserttitle};
 		\node [below = 1em of title] (subtitle) {\usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\insertsubtitle};
 		\ifthenelse{\equal{\insertsubtitle}{}}{
@@ -25,16 +89,11 @@
 }
 
 
-\setbeamertemplate{footline}{
-	
-\begin{tikzpicture}[remember picture, overlay]
-	\node[rectangle, fill = aaulightblue, text width=\paperwidth, minimum height=2em, anchor=south west] (footerline) {};
-	\node [anchor=south west, text = white] at (current page.south west) (institut) {\usebeamercolor[fg]{institute}\strut\insertinstitute};
-	\node [anchor=south east, text = white] at (current page.south east) (date) {\strut\usebeamercolor[fg]{date}\insertdate};
-\end{tikzpicture}
-
-
-}
+%\setbeamertemplate{footline}{
+%\begin{beamercolorbox}[wd=\textwidth, ht=1.3em, dp=0.7em, leftskip=0.3em, rightskip=0.3em]{colorbox}
+%	\insertinstitute \hfill \insertdate
+%\end{beamercolorbox}
+%}
 
 
 \setbeamertemplate{itemize item}{\textbullet}
@@ -52,19 +111,9 @@
 \setbeamertemplate{background canvas}{
 	
 	\ifbeamer@plainframe
-		\begin{tikzpicture}
-			\node[opacity=0]{\includegraphics[width=\paperwidth,height=\paperheight]{background}};
-		\end{tikzpicture}
+		{}
 	\else
-	
-	\ifthenelse{\equal{\thepage}{1}}
-	{
-		\begin{tikzpicture}[remember picture, overlay]
-			\fill[aaudarkblue] (current page.south west) rectangle (current page.north east);
-		\end{tikzpicture}
-	}{
 		\aau@inner@bg
-	}
 	\fi
 }
 
@@ -83,6 +132,8 @@
 }
 \setbeamertemplate{subsection in toc}{}
 \setbeamertemplate{subsubsection in toc}{}
+
+\setbeamertemplate{navigation symbols}{}
 
 \ProcessPgfOptions{/aau/inner}
 
