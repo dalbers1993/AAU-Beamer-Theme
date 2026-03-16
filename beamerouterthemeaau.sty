@@ -1,0 +1,150 @@
+% Header and Footer
+\newcommand{\aau@outer@footlinetext}{}
+\newcommand{\aau@outer@id}{
+	\insertinstitute \hfill \insertdate
+}
+\newcommand{\aau@outer@ia}{
+	\insertinstitute \hfill \insertauthor
+}
+\newcommand{\aau@outer@ai}{
+	\insertauthor \hfill \insertinstitute
+}
+\newcommand{\aau@outer@ad}{
+	\insertauthor \hfill \insertdate
+}
+\newcommand{\aau@outer@di}{
+	\insertdate \hfill \insertinstitute
+}
+\newcommand{\aau@outer@da}{
+	\insertdate \hfill \insertauthor
+}
+\newcommand{\aau@outer@iad}{
+	\insertinstitute \hfill \insertauthor \hfill \insertdate
+}
+\newcommand{\aau@outer@ida}{
+	\insertinstitute \hfill \insertdate \hfill \insertauthor
+}
+\newcommand{\aau@outer@aid}{
+	\insertauthor \hfill \insertinstitute \hfill \insertdate  
+}
+\newcommand{\aau@outer@adi}{
+	\insertauthor \hfill \insertdate \hfill \insertinstitute   
+}
+\newcommand{\aau@outer@dia}{
+	\insertdate \hfill \insertinstitute \hfill \insertauthor   
+}
+\newcommand{\aau@outer@dai}{
+	\insertdate \hfill \insertauthor \hfill \insertinstitute   
+}
+
+\pgfkeys{
+	/aau/outer/footlinetext/.cd,
+	.is choice,
+	id/.code=\let\aau@outer@footlinetext\aau@outer@id,
+	ia/.code=\let\aau@outer@footlinetext\aau@outer@ia,
+	ai/.code=\let\aau@outer@footlinetext\aau@outer@ai,
+	ad/.code=\let\aau@outer@footlinetext\aau@outer@ad,
+	di/.code=\let\aau@outer@footlinetext\aau@outer@di,
+	da/.code=\let\aau@outer@footlinetext\aau@outer@da,
+	iad/.code=\let\aau@outer@footlinetext\aau@outer@iad,
+	ida/.code=\let\aau@outer@footlinetext\aau@outer@ida,
+	aid/.code=\let\aau@outer@footlinetext\aau@outer@aid,
+	adi/.code=\let\aau@outer@footlinetext\aau@outer@adi,
+	dia/.code=\let\aau@outer@footlinetext\aau@outer@dia,
+	dai/.code=\let\aau@outer@footlinetext\aau@outer@dai,
+	iad/.code=\let\aau@outer@footlinetext\aau@outer@iad,
+	none/.code=\let\aau@outer@footlinetext\aau@outer@footlinetext,
+}
+
+\pgfkeys{
+	/aau/outer/.cd,
+	/footlinerule/.store in = \aau@outer@footlinerule,
+	/footlinerule=0pt,
+	/footlinerulecolor/.store in = \aau@outer@footlinerulecolor,
+	/footlinerulecolor=black,
+}
+
+
+\setbeamertemplate{footline}{
+	\textcolor{\aau@outer@footlinerulecolor}{\rule{\textwidth}{\aau@outer@footlinerule}}
+	\begin{beamercolorbox}[wd=\textwidth, ht=1.3em,  dp=0.7em, leftskip=0.3em, rightskip=0.3em]{colorbox}
+		\aau@outer@footlinetext
+	\end{beamercolorbox}
+}
+
+\setbeamertemplate{navigation symbols}{}
+
+% Sidebar
+\newcommand{\nosidebar}{
+	\setbeamertemplate{sidebar left}{}
+}
+
+\newcommand{\sidebarleft}{
+	\setbeamersize{sidebar width left=3em}
+	\setbeamertemplate{sidebar left}{
+		\begin{tikzpicture}[remember picture, overlay]
+			\node[top color=aaudarkblue, bottom color=aaulightblue, text width=8em, minimum height=\paperheight-\footheight+0.8em,inner sep=1em, text=white, anchor=north west] (sidebarleft) at ([xshift=-1pt]current page.north west) {
+				\begin{minipage}[t]{10em}
+					\raggedright
+					\setbeamercolor{section in toc}{fg=white}
+					\setbeamertemplate{section in toc}{
+						\inserttocsectionnumber. \inserttocsection\vspace{1em}
+					}
+					\tableofcontents
+				\end{minipage}
+			};
+		\end{tikzpicture}
+	}
+}
+
+\newcommand{\sidebarright}{
+	\setbeamersize{sidebar width right=3em}
+	\setbeamertemplate{sidebar right}{
+		\begin{tikzpicture}[remember picture, overlay]
+			\node[top color=aaudarkblue, bottom color=aaulightblue, text width=8em, minimum height=\paperheight-\footheight+0.8em,inner sep=1em, text=white, anchor=north east] (sidebarright) at ([xshift=1pt]current page.north east) {
+				\begin{minipage}[t]{10em}
+					\raggedright
+					\setbeamercolor{section in toc}{fg=white}
+					\setbeamertemplate{section in toc}{
+						\inserttocsectionnumber. \inserttocsection\vspace{1em}
+					}
+					\tableofcontents
+				\end{minipage}
+			};
+		\end{tikzpicture}
+	}
+}
+
+\pgfkeys{
+	/aau/outer/sidebar/.cd,
+	.is choice,
+	off/.code=\nosidebar,
+	left/.code=\sidebarleft,
+	right/.code=\sidebarright
+}
+
+
+
+% Logo
+
+\addtobeamertemplate{background canvas}{}{
+	\logo{\includegraphics[scale=0.03]{logodark}}
+	\begin{tikzpicture}[remember picture,overlay]
+		\node[anchor=north east] (logotop) at ([xshift=-5em]current page.north east) {\insertlogo};
+		\node[anchor=south east] (logobottom) at ([xshift=-5em, yshift=\footheight-0.4em]current page.south east) {\insertlogo};
+	\end{tikzpicture}
+}
+%\setbeamertemplate{logo}{
+%	\begin{tikzpicture}[remember picture,overlay]
+%		\node[anchor=north] (logobottom) at (2,2) {HALLOOOO};
+%	\end{tikzpicture}
+%}
+
+
+% Frame title
+\setbeamertemplate{frametitle}{
+	\vspace*{1.5em}\hspace*{0em}\insertframetitle
+}
+
+% Optionen aktivieren
+\ProcessPgfOptions{/aau/inner}

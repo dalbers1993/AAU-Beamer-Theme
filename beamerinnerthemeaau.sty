@@ -1,54 +1,10 @@
 \mode<presentation>
 
+% Title and part pages.
 \newcommand{\aau@inner@bg}{
-		\includegraphics[width=\paperwidth, height=\paperheight]{background}
+	\includegraphics[width=\paperwidth, height=\paperheight]{background}
 }
 
-\newcommand{\aau@inner@footlinetext}{}
-\newcommand{\aau@inner@id}{
-	\insertinstitute \hfill \insertdate
-}
-\newcommand{\aau@inner@ia}{
-	\insertinstitute \hfill \insertauthor
-}
-\newcommand{\aau@inner@ai}{
-	\insertauthor \hfill \insertinstitute
-}
-\newcommand{\aau@inner@ad}{
-	\insertauthor \hfill \insertdate
-}
-\newcommand{\aau@inner@di}{
-	\insertdate \hfill \insertinstitute
-}
-\newcommand{\aau@inner@da}{
-	\insertdate \hfill \insertauthor
-}
-\newcommand{\aau@inner@iad}{
-	\insertinstitute \hfill \insertauthor \hfill \insertdate
-}
-\newcommand{\aau@inner@ida}{
-	\insertinstitute \hfill \insertdate \hfill \insertauthor
-}
-\newcommand{\aau@inner@aid}{
-	\insertauthor \hfill \insertinstitute \hfill \insertdate  
-}
-\newcommand{\aau@inner@adi}{
-	\insertauthor \hfill \insertdate \hfill \insertinstitute   
-}
-\newcommand{\aau@inner@dia}{
-	\insertdate \hfill \insertinstitute \hfill \insertauthor   
-}
-\newcommand{\aau@inner@dai}{
-	\insertdate \hfill \insertauthor \hfill \insertinstitute   
-}
-
-
-
-\setbeamertemplate{footline}{
-	\begin{beamercolorbox}[wd=\textwidth, ht=1.3em, dp=0.7em, leftskip=0.3em, rightskip=0.3em]{colorbox}
-		\aau@inner@footlinetext
-	\end{beamercolorbox}
-}
 
 \pgfkeys{
 	/aau/inner/bg/.cd,
@@ -57,24 +13,12 @@
 	none/.code=\let\aau@inner@bg\@empty,
 }
 
-
-\pgfkeys{
-	/aau/inner/footlinetext/.cd,
-	.is choice,
-	id/.code=\let\aau@inner@footlinetext\aau@inner@id,
-	ia/.code=\let\aau@inner@footlinetext\aau@inner@ia,
-	ai/.code=\let\aau@inner@footlinetext\aau@inner@ai,
-	ad/.code=\let\aau@inner@footlinetext\aau@inner@ad,
-	di/.code=\let\aau@inner@footlinetext\aau@inner@di,
-	da/.code=\let\aau@inner@footlinetext\aau@inner@da,
-	iad/.code=\let\aau@inner@footlinetext\aau@inner@iad,
-	ida/.code=\let\aau@inner@footlinetext\aau@inner@ida,
-	aid/.code=\let\aau@inner@footlinetext\aau@inner@aid,
-	adi/.code=\let\aau@inner@footlinetext\aau@inner@adi,
-	dia/.code=\let\aau@inner@footlinetext\aau@inner@dia,
-	dai/.code=\let\aau@inner@footlinetext\aau@inner@dai,
-	iad/.code=\let\aau@inner@footlinetext\aau@inner@iad,
-	none/.code=\let\aau@inner@footlinetext\aau@inner@footlinetext,
+\setbeamertemplate{background canvas}{
+	\ifbeamer@plainframe
+	{}
+	\else
+	\aau@inner@bg
+	\fi
 }
 
 \setbeamertemplate{title page}{
@@ -83,57 +27,78 @@
 		\node (title) at ([yshift=1cm]current page.center) {\usebeamercolor[fg]{title}\usebeamerfont{title}\inserttitle};
 		\node [below = 1em of title] (subtitle) {\usebeamercolor[fg]{subtitle}\usebeamerfont{subtitle}\insertsubtitle};
 		\ifthenelse{\equal{\insertsubtitle}{}}{
-		\node [below = 2em of title] (author) {\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor};}{
-		\node [below = 2em of subtitle] (author) {\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor};}		
+			\node [below = 2em of title] (author) {\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor};}{
+			\node [below = 2em of subtitle] (author) {\usebeamercolor[fg]{author}\usebeamerfont{author}\insertauthor};}		
 	\end{tikzpicture}
-}
-
-
-%\setbeamertemplate{footline}{
-%\begin{beamercolorbox}[wd=\textwidth, ht=1.3em, dp=0.7em, leftskip=0.3em, rightskip=0.3em]{colorbox}
-%	\insertinstitute \hfill \insertdate
-%\end{beamercolorbox}
-%}
-
-
-\setbeamertemplate{itemize item}{\textbullet}
-%\setbeamertemplate{itemize subitem}{\textbullet}
-
-\setbeamertemplate{frametitle}{
-	\vspace*{2em}\hspace*{0em}\insertframetitle
-}
-
-\setbeamertemplate{blocks}[rounded][shadow]
-
-
-
-
-\setbeamertemplate{background canvas}{
-	
-	\ifbeamer@plainframe
-		{}
-	\else
-		\aau@inner@bg
-	\fi
 }
 
 \setbeamertemplate{section page}{
 	\begin{tikzpicture}[remember picture, overlay]
 		\fill[aaudarkblue] (current page.south west) rectangle (current page.north east);
-	\end{tikzpicture}
-	\begin{tikzpicture}[remember picture, overlay]
 		\node (section title) at ([yshift=1cm]current page.center) {\usebeamercolor[fg]{section}\usebeamerfont{section}\insertsection};
 		\node [below = 1em of section title] (subsection title) {\usebeamercolor[fg]{subsection}\usebeamerfont{subsection}\insertsubsection};
 	\end{tikzpicture}
 }
 
+\setbeamertemplate{subsection page}{
+	\begin{tikzpicture}[remember picture, overlay]
+		\fill[aaudarkblue] (current page.south west) rectangle (current page.north east);
+		\node at (current page.center) (subsection title) {\usebeamercolor[fg]{subsection}\usebeamerfont{subsection}\insertsubsection};
+	\end{tikzpicture}
+}
+
+% Itemize environments.
+% NEEDS WORK DIE SYMBOLE SIND NICHT MITTIG ZUM TEXT WIE BEI STANDARD
+\newcommand{\aau@inner@itemsymbol}{$\blacktriangleright$}
+\newcommand{\aau@inner@subitemsymbol}{\textbullet}
+\newcommand{\aau@inner@subsubitemsymbol}{\textendash}
+
+\pgfkeys{
+	/aau/inner/.cd,
+	itemsymbol/.store in=\aau@inner@itemsymbol,
+	subitemsymbol/.store in=\aau@inner@subitemsymbol,
+	subsubitemsymbol/.store in=\aau@inner@subsubitemsymbol,
+}
+
+\setbeamertemplate{itemize item}{\aau@inner@itemsymbol}
+\setbeamertemplate{itemize subitem}{\aau@inner@subitemsymbol}
+\setbeamertemplate{itemize subsubitem}{\aau@inner@subsubitemsymbol}
+
+% Enumerate environments.
+% FUNKTIONIERT NICHT
+\newcommand{\aau@inner@enumsymbol}{\arabic{enumi}.}
+\newcommand{\aau@inner@subenumsymbol}{\alph{enumii}.}
+\newcommand{\aau@inner@subsubenumsymbol}{\roman{enumiii}.}
+
+\pgfkeys{
+	/aau/inner/.cd,
+	enumsymbol/.store in=\aau@inner@enumsymbol,
+	subenumsymbol/.store in=\aau@inner@subenumsymbol,
+	subsubenumsymbol/.store in=\aau@inner@subsubenumsymbol,
+}
+
+\setbeamertemplate{enumerate item}{\aau@inner@enumsymbol}
+\setbeamertemplate{enumerate subitem}{\aau@inner@subenumsymbol}
+\setbeamertemplate{enumerate subsubitem}{\aau@inner@subsubenumsymbol}
+
+% Description environments.
+
+% Block environments.
+\setbeamertemplate{blocks}[rounded][shadow]
+
+% Theorem and proof environments.
+
+% Figures and tables.
+
+% Footnotes.
+
+% Bibliography entries.
 \setbeamertemplate{section in toc}{
 	\inserttocsectionnumber. \inserttocsection
 }
 \setbeamertemplate{subsection in toc}{}
 \setbeamertemplate{subsubsection in toc}{}
 
-\setbeamertemplate{navigation symbols}{}
 
 \ProcessPgfOptions{/aau/inner}
 

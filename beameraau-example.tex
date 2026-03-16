@@ -1,4 +1,4 @@
-\documentclass{beamer}
+\documentclass[aspectratio=1610]{beamer}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{xcolor}
@@ -10,7 +10,7 @@
 \institute{Universität Klagenfurt}
 \date{\today}
 
-\usetheme[footlinetext=id]{aau}
+\usetheme[sidebar=right]{aau}
 
 \begin{document}
 	
@@ -28,15 +28,34 @@
 \end{frame}
 
 \section{Aufzählungen}
-\begin{frame}{Listen, die einen langen Titel haben}
+\begin{frame}{Ungeordnete Aufzählungen}
 	\begin{itemize}
 		\item Erster Punkt
 		\item Zweiter Punkt
 		\begin{itemize}
 			\item Erster Unterpunkt
 			\item Zweiter Unterpunkt
+			\begin{itemize}
+				\item Erster Unterunterpunkt
+				\item Zweiter Unterunterpunkt
+			\end{itemize}
 		\end{itemize}
 	\end{itemize}
+\end{frame}
+
+\begin{frame}{Geordnete Aufzählungen}
+	\begin{enumerate}
+		\item Erster Punkt
+		\item Zweiter Punkt
+		\begin{enumerate}
+			\item Erster Unterpunkt
+			\item Zweiter Unterpunkt
+			\begin{enumerate}
+				\item Erster Unterunterpunkt
+				\item Zweiter Unterunterpunkt
+			\end{enumerate}
+		\end{enumerate}
+	\end{enumerate}
 \end{frame}
 
 \section{Alert, Examples, etc.}
@@ -130,15 +149,20 @@
 	Hier ist nichts.
 \end{frame}
 
-\section{Dr. Sectionpage}
+\section{Abschnittsfolie}
 
 \begin{frame}
 	\sectionpage
 \end{frame}
 
-\subsection{Oder wie ich lernte, die Subsection zu lieben}
+\subsection{Abschnittsfolie mit Unterabschnitt}
 \begin{frame}
 	\sectionpage
+\end{frame}
+
+\subsection{Unterabschnittsfolie}
+\begin{frame}
+	\subsectionpage
 \end{frame}
 	
 	
